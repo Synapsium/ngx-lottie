@@ -1,6 +1,20 @@
 {
     "name": "@synapsium/ngx-lottie",
-    "version": "1.0.0",
+    "version": "0.0.1",
+    "author": "https://github.com/synapsium/ngx-lottie/graphs/contributors",
+    "license": "MIT",
+    "keywords": [
+        "lottie",
+        "angular",
+        "wrapper"
+    ],
+    "bugs": {
+        "url": "https://github.com/synapsium/ngx-lottie/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/Synapsium/ngx-lottie.git"
+    },
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -10,7 +24,7 @@
         "e2e": "ng e2e",
         "npmpublish": "npm run build lottie && cd ./dist/@synapsium/ngx-lottie && npm publish --access public"
     },
-    "private": true,
+    "private": false,
     "dependencies": {
         "@angular/animations": "~7.0.0",
         "@angular/common": "~7.0.0",
@@ -22,6 +36,7 @@
         "@angular/platform-browser-dynamic": "~7.0.0",
         "@angular/router": "~7.0.0",
         "core-js": "^2.5.4",
+        "lottie-web": "^5.4.3",
         "rxjs": "~6.3.3",
         "zone.js": "~0.8.26"
     },
