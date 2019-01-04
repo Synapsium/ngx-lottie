@@ -1,27 +1,52 @@
-# Demo
+<p align="center">
+  <img height="200px" width="200px"  src="http://airbnb.io/lottie/images/Introduction_00_sm.gif">
+  <a href="https://synapsium.com">
+    <h1 align="center">ngx-lottie</h1>
+  </a>
+</p>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.1.
+<p align="center">
+Quickly way to integrate <a href="http://airbnb.io/lottie/">Lottie-web</a> component with <a href="https://angular.io/">Angular</a>
+</p>
 
-## Development server
+# Lottie
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Lottie is a mobile library for Web, and iOS that parses Adobe After Effects animations exported as json with Bodymovin and renders them natively on mobile!
+View documentation, FAQ, help, examples, and more at <a href="http://airbnb.io/lottie/">here</a>.
 
-## Code scaffolding
+## Setup
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Installation
 
-## Build
+Install `lottie-web` and `ngx-lottie` library from `npm`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```bash
+npm install lottie-web @synapsium/ngx-lottie --save
+```
 
-## Running unit tests
+### Module usage
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Add `LottieModule` to module
 
-## Running end-to-end tests
+```javascript
+import { LottieModule } from '@synapsium/ngx-lottie';
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
+@NgModule({
+  ...
+  imports: [
+    ...
+    LottieModule
+  ]
+})
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## How to use
+
+Add the following tag in your html :
+```html
+<lottie className="container-class" 
+         [path]="path">
+</lottie>
+```
+
