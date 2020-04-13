@@ -1,32 +1,29 @@
 import { Component, Inject, Optional, ViewChild, ElementRef, Input, Output, OnInit, AfterViewInit, OnChanges, OnDestroy, SimpleChanges, NgZone } from '@angular/core';
-import { LottieStatic, LottieAnimationOptions } from '../typings/lottie';
-
-declare var lottie: LottieStatic;
+import Lottie, { AnimationConfigWithData, AnimationConfigWithPath } from 'lottie-web';
 
 @Component({
   selector: 'lottie',
+  styleUrls: ['./lottie.component.scss'],
   template: `
-    <div #lottie [ngClass]="className"></div>
+    <div #lottie></div>
   `
 })
 export class LottieComponent implements OnInit, OnDestroy {
-  @Input() className: string;
-  @Input() name: string;
-  @Input() renderer: string = 'svg';
-  @Input() loop: boolean = true;
-  @Input() autoplay: boolean = true;
+  @Input() animationEvent: 'hover' | 'click';
+  @Input() renderer: 'svg' | 'canvas' | 'html' = 'svg';
+  @Input() loop: boolean;
   @Input() path: string;
   @Input() animationData: any;
   
-  @ViewChild('lottie') lottieElement: ElementRef;
+  @ViewChild('lottie', {static: true}) lottieElement: ElementRef;
 
   protected id: number;
-  private _instance: Lottie;
+  private _instance: any;
 
   constructor(private zone: NgZone) { }
 
   ngOnInit() {
-    if (typeof lottie === 'undefined') {
+    if (typeof Lottie === 'undefined') {
       throw new TypeError('ngx-lottie wrapper requires Lottie (https://github.com/airbnb/lottie-web)');
     }
 
@@ -37,11 +34,11 @@ export class LottieComponent implements OnInit, OnDestroy {
     this.id = Math.random();
     var container = this.lottieElement.nativeElement;
 
-    const animationOptions: LottieAnimationOptions = {
+    const animationOptions: any = {
       container: container,
       renderer: this.renderer,
       loop: this.loop,
-      autoplay: this.autoplay
+      autoplay: !this.animationEvent
     };
 
     if(this.path) {
@@ -51,8 +48,24 @@ export class LottieComponent implements OnInit, OnDestroy {
     }
 
     this.zone.runOutsideAngular(() => {
-      this._instance = lottie.loadAnimation(animationOptions);
+      this._instance = Lottie.loadAnimation(animationOptions);
+
+      switch(this.animationEvent){
+        case 'click' :
+          this.lottieElement.nativeElement.addEventListener('mousedown', () => { this.playAnimation() });
+          this.lottieElement.nativeElement.addEventListener('touchstart', () => { this.playAnimation() });
+          break;
+        case 'hover' :
+          this.lottieElement.nativeElement.addEventListener('mouseenter', () => { this.playAnimation() });
+          break;
+        default:
+          break;
+      }
     });
+  }
+
+  playAnimation(){
+    this._instance.goToAndPlay(0);
   }
 
   ngOnDestroy() {

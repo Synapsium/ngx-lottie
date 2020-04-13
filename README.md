@@ -25,6 +25,13 @@ npm install lottie-web @synapsium/ngx-lottie --save
 ```
 
 ### Module usage
+Add `lottie.min.js` into angular.json
+
+```javascript
+"scripts": [
+    "node_modules/lottie-web/build/player/lottie.min.js"
+]
+```
 
 Add `LottieModule` to module
 
@@ -45,8 +52,8 @@ import { LottieModule } from '@synapsium/ngx-lottie';
 
 Add the following tag in your html :
 ```html
-<lottie className="container-class" 
-         [path]="path">
+<lottie [path]="assets/home.json" 
+        [loop]="true" animationEvent="click">
 </lottie>
 ```
 
